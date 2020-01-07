@@ -31,8 +31,8 @@ const QuillWrapper = styled.div`
 `;
 
 const Editor = ({ title, body, onChangeField }) => {
-  const quillElement = useRef(null);
-  const quillInstance = useRef(null);
+  const quillElement = useRef(null); // Quill을 적용할 DivElement를 설정
+  const quillInstance = useRef(null); // Quill 인스턴스를 설정
 
   useEffect(() => {
     quillInstance.current = new Quill(quillElement.current, {
@@ -57,6 +57,17 @@ const Editor = ({ title, body, onChangeField }) => {
       }
     });
   }, [onChangeField]);
+
+  // const mounted = useRef(false);
+  // useEffect(() => {
+  //   if (mounted.current) return;
+  //   mounted.current = true;
+  //   quillInstance.current.root.innerHTML = body;
+  // }, [body]);
+
+  useEffect(() => {
+    quillInstance.current.root.innerHTML = body;
+  }, []); /* eslint-disable-line */
 
   const onChangeTitle = e => {
     onChangeField({ key: 'title', value: e.target.value });
