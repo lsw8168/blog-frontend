@@ -7,12 +7,13 @@ import WritePage from './pages/WritePage';
 import PostPage from './pages/PostPage';
 import { Helmet } from 'react-helmet-async';
 
-function App() {
+const App = () => {
   return (
     <>
       <Helmet>
         <title>REACTERS</title>
       </Helmet>
+
       <Route component={PostListPage} path={['/@:username', '/']} exact />
       <Route component={LoginPage} path="/login" />
       <Route component={RegisterPage} path="/register" />
@@ -20,6 +21,5 @@ function App() {
       <Route component={PostPage} path="/@:username/:postId" />
     </>
   );
-}
-
+};
 export default App;
