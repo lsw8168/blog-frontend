@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import AskRemoveModal from './AskRemoveModal';
 
-const PostActionButtonBlock = styled.div`
+const PostActionButtonsBlock = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-bottom: 2rem;
@@ -40,12 +40,13 @@ const PostActionButtons = ({ onEdit, onRemove }) => {
     setModal(false);
     onRemove();
   };
+
   return (
     <>
-      <PostActionButtonBlock>
+      <PostActionButtonsBlock>
         <ActionButton onClick={onEdit}>수정</ActionButton>
         <ActionButton onClick={onRemoveClick}>삭제</ActionButton>
-      </PostActionButtonBlock>
+      </PostActionButtonsBlock>
       <AskRemoveModal
         visible={modal}
         onConfirm={onConfirm}

@@ -6,6 +6,7 @@ import palette from '../../lib/styles/palette';
 import Responsive from '../common/Responsive';
 
 const EditorBlock = styled(Responsive)`
+  /* 페이지 위 아래 여백 지정 */
   padding-top: 5rem;
   padding-bottom: 5rem;
 `;
@@ -19,6 +20,7 @@ const TitleInput = styled.input`
   width: 100%;
 `;
 const QuillWrapper = styled.div`
+  /* 최소 크기 지정 및 padding 제거 */
   .ql-editor {
     padding: 0;
     min-height: 320px;
@@ -26,7 +28,7 @@ const QuillWrapper = styled.div`
     line-height: 1.5;
   }
   .ql-editor.ql-blank::before {
-    left: 0;
+    left: 0px;
   }
 `;
 
@@ -38,7 +40,9 @@ const Editor = ({ title, body, onChangeField }) => {
     quillInstance.current = new Quill(quillElement.current, {
       theme: 'bubble',
       placeholder: '내용을 작성하세요...',
-      module: {
+      modules: {
+        // 더 많은 옵션
+        // https://quilljs.com/docs/modules/toolbar/ 참고
         toolbar: [
           [{ header: '1' }, { header: '2' }],
           ['bold', 'italic', 'underline', 'strike'],
@@ -58,16 +62,12 @@ const Editor = ({ title, body, onChangeField }) => {
     });
   }, [onChangeField]);
 
-  // const mounted = useRef(false);
-  // useEffect(() => {
-  //   if (mounted.current) return;
-  //   mounted.current = true;
-  //   quillInstance.current.root.innerHTML = body;
-  // }, [body]);
-
+  const mounted = useRef(false);
   useEffect(() => {
+    if (mounted.current) return;
+    mounted.current = true;
     quillInstance.current.root.innerHTML = body;
-  }, []); /* eslint-disable-line */
+  }, [body]);
 
   const onChangeTitle = e => {
     onChangeField({ key: 'title', value: e.target.value });
@@ -76,7 +76,7 @@ const Editor = ({ title, body, onChangeField }) => {
   return (
     <EditorBlock>
       <TitleInput
-        placeholder="제목을 입력하세요."
+        placeholder="제목을 입력하세요"
         onChange={onChangeTitle}
         value={title}
       />

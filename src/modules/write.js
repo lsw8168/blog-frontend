@@ -12,7 +12,7 @@ const [
   WRITE_POST_SUCCESS,
   WRITE_POST_FAILURE,
 ] = createRequestActionTypes('write/WRITE_POST'); // 포스트 작성
-const SET_ORIGINAL_POST = 'write/SET_ORIGINAK_POST';
+const SET_ORIGINAL_POST = 'write/SET_ORIGINAL_POST';
 const [
   UPDATE_POST,
   UPDATE_POST_SUCCESS,
@@ -43,6 +43,7 @@ export const updatePost = createAction(
 // saga 생성
 const writePostSaga = createRequestSaga(WRITE_POST, postsAPI.writePost);
 const updatePostSaga = createRequestSaga(UPDATE_POST, postsAPI.updatePost);
+
 export function* writeSaga() {
   yield takeLatest(WRITE_POST, writePostSaga);
   yield takeLatest(UPDATE_POST, updatePostSaga);
